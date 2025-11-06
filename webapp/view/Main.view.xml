@@ -1,0 +1,40 @@
+<mvc:View controllerName="flightui5as.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+    <Table
+		items="{
+			path: 'flightDataModel>/'
+			
+		}">
+		<headerToolbar>
+			<OverflowToolbar>
+				<Title text="Products" level="H2"/>
+				<ToolbarSpacer/>
+				
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column>
+				<Text text="{i18n>Carrid}" />
+			</Column>
+			<Column>
+				<Text text="{i18n>Carrname}" />
+			</Column>
+			<Column>
+				<Text text="{i18n>Url}" />
+			</Column>
+
+		</columns>
+		<items>
+			<ColumnListItem vAlign="Middle" type="Navigation">
+				<cells>
+					<Text text="{flightDataModel>Carrid}" wrapping="false" />
+					<Text text="{flightDataModel>Carrname}" wrapping="false"/>
+					<Text text="{flightDataModel>Url}" />
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+    </Page>
+</mvc:View>
