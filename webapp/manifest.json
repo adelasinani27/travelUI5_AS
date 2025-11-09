@@ -104,13 +104,25 @@
           "target": [
             "TargetMain"
           ]
+        },
+        {
+          "name": "RouteDetail",
+          "pattern": "detail/{Carrid}",
+          "target": [
+            "TargetDetail"
+          ]
         }
       ],
       "targets": {
         "TargetMain": {
           "id": "Main",
           "name": "Main"
-        }
+        },
+
+        "TargetDetail": {
+           "id": "Detail",
+            "name": "Detail"
+          }
       }
     },
     "rootView": {

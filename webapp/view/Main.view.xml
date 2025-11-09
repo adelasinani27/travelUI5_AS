@@ -6,7 +6,9 @@
 		items="{
 			path: 'flightDataModel>/'
 			
-		}">
+		}"
+    mode="SingleSelectMaster"
+    itemPress=".onRowPress">
 		<headerToolbar>
 			<OverflowToolbar>
 				<Title text="Products" level="H2"/>

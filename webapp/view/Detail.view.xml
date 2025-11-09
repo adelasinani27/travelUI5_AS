@@ -1,0 +1,72 @@
+<mvc:View
+    controllerName="flightui5as.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:uxap="sap.uxap">
+
+    <Page id="_IDGenPage" title="Flight Detail" showNavButton="true" navButtonPress=".onNavBack">
+
+        <uxap:ObjectPageLayout id="objectPage">
+            <uxap:headerTitle>
+                <uxap:ObjectPageHeader
+                    id="ObjectPageHeader"
+                    objectTitle="{flightDataModel>Carrid}"
+                    objectSubtitle="{flightDataModel>Carrname}" />
+            </uxap:headerTitle>
+
+            <uxap:sections>
+                <uxap:ObjectPageSection id="FlightDetailsSection" title="Flight Details">
+                    <uxap:ObjectPageSubSection id="FlightDetailsSubSection">
+                        <VBox id="_IDGenVBox" class="sapUiSmallMargin">
+
+                            <Label id="_IDGenLabel1" text="Carrier ID" />
+                            <Input id="_IDGenInput" value="{flightDataModel>Carrid}" editable="false" />
+
+                            <Label id="_IDGenLabel2" text="Carrier Name" />
+                            <Input id="_IDGenInput1" value="{flightDataModel>Carrname}" editable="false" />
+
+                            <Label id="_IDGenLabel3" text="Currency Code" />
+                            <Input id="_IDGenInput2" value="{flightDataModel>Currcode}" editable="false" />
+
+                            <Label id="_IDGenLabel4" text="URL" />
+                            <Input id="_IDGenInput3" value="{flightDataModel>Url}" editable="false" />
+
+                            <Label id="_IDGenLabel5" text="Status" />
+                            <Input id="_IDGenInput4" value="{flightDataModel>Status}" editable="false" />
+
+                            <!-- <Label id="_IDGenLabel6" text="Airline IMG (URL)" />
+                            <Input id="_IDGenInput5" value="{flightDataModel>AirlineIMG}" editable="false" /> -->
+
+                            <!-- <Label id="_IDGenLabel7" text="Edit Access" />
+                            <Input id="_IDGenInput6" value="{flightDataModel>Edit_ac}" editable="false" />
+
+                            <Label id="_IDGenLabel8" text="Delete Access" />
+                            <Input id="_IDGenInput7" value="{flightDataModel>Delete_mc}" editable="false" />
+
+                            <Label id="_IDGenLabel9" text="Update Access" />
+                            <Input id="_IDGenInput8" value="{flightDataModel>Update_mc}" editable="false" /> -->
+
+                            <Label id="_IDGenLabel10" text="Local Created By" />
+                            <Input id="_IDGenInput9" value="{flightDataModel>LocalCreatedBy}" editable="false" />
+
+                            <Label id="_IDGenLabel11" text="Local Created At" />
+                            <Input id="_IDGenInput10" value="{flightDataModel>LocalCreatedAt}" editable="false" />
+
+                            <Label id="_IDGenLabel12" text="Local Last Changed By" />
+                            <Input id="_IDGenInput11" value="{flightDataModel>LocalLastChangedBy}" editable="false" />
+
+                            <Label id="_IDGenLabel13" text="Local Last Changed At" />
+                            <Input id="_IDGenInput12" value="{flightDataModel>LocalLastChangedAt}" editable="false" />
+
+                            <Label id="_IDGenLabel14" text="Last Changed At" />
+                            <Input id="_IDGenInput13" value="{flightDataModel>LastChangedAt}" editable="false" />
+
+                          
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:ObjectPageSection>
+            </uxap:sections>
+        </uxap:ObjectPageLayout>
+
+    </Page>
+</mvc:View>
