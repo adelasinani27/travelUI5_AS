@@ -12,7 +12,7 @@ sap.ui.define([
     var sCarrid = oEvent.getParameter("arguments").Carrid;
     var oGlobalModel = this.getOwnerComponent().getModel("flightDataModel");
     var aData = oGlobalModel.getData();
-    // Find index of flight
+    
     var iIndex = aData.findIndex(function (item) {
         return item.Carrid === sCarrid;
     });
