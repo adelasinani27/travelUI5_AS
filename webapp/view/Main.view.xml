@@ -2,38 +2,41 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <Page id="page" title="{i18n>title}">
-    <Table
+    <Table id="_IDGenTable"
 		items="{
-			path: 'flightDataModel>/'
-			
-		}"
-    mode="SingleSelectMaster"
-    itemPress=".onRowPress">
+			path: 'flightDataModel>/',
+			sorter: {
+			path: 'Carrname'
+			}
+		}">
 		<headerToolbar>
-			<OverflowToolbar>
-				<Title text="Products" level="H2"/>
-				<ToolbarSpacer/>
-				
-			</OverflowToolbar>
+		   <OverflowToolbar id="_IDGenOverflowToolbar">
+		       <Title id="IDGenTitle" text="{Products}" level="H2"/>
+			   <ToolbarSpacer id="_IDGenToolbarSpacer"/>
+			   <Button id="_IDGenButton" text="Open Dialog" press="onOpenPressed"/>
+			   </OverflowToolbar>
+   
 		</headerToolbar>
+
 		<columns>
-			<Column>
-				<Text text="{i18n>Carrid}" />
+			<Column id="_IDGenColumn">
+				<Text id="_IDGenText" text="{i18n>Carrid}" />
 			</Column>
-			<Column>
-				<Text text="{i18n>Carrname}" />
+			<Column id="_IDGenColumn1">
+				<Text id="_IDGenText1" text="{i18n>Carrname}" />
 			</Column>
-			<Column>
-				<Text text="{i18n>Url}" />
+			<Column id="_IDGenColumn2">
+				<Text id="_IDGenText2" text="{i18n>Url}" />
 			</Column>
 
 		</columns>
 		<items>
-			<ColumnListItem vAlign="Middle" type="Navigation">
+			<ColumnListItem id="_IDGenColumnListItem" vAlign="Middle" type="Navigation" press="onListPress">
 				<cells>
-					<Text text="{flightDataModel>Carrid}" wrapping="false" />
-					<Text text="{flightDataModel>Carrname}" wrapping="false"/>
-					<Text text="{flightDataModel>Url}" />
+					<Text id="_IDGenText3" text="{flightDataModel>Carrid}" wrapping="false" />
+					<Text id="_IDGenText4" text="{flightDataModel>Carrname}" wrapping="false"/>
+					<Text id="_IDGenText5" 
+					text="{parts: ['flightDataModel>Url', 'flightDataModel>Carrname'], formatter: '.formatter.urlFormatter'}" />
 				</cells>
 			</ColumnListItem>
 		</items>

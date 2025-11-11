@@ -106,11 +106,9 @@
           ]
         },
         {
-          "name": "RouteDetail",
-          "pattern": "detail/{Carrid}",
-          "target": [
-            "TargetDetail"
-          ]
+          "pattern": "Detail/{Carrid}",
+          "name": "Detail",
+          "target": "Detail"
         }
       ],
       "targets": {
@@ -119,9 +117,10 @@
           "name": "Main"
         },
 
-        "TargetDetail": {
+        "Detail": {
            "id": "Detail",
-            "name": "Detail"
+            "name": "Detail",
+            "viewLevel": 1
           }
       }
     },

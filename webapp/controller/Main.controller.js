@@ -1,8 +1,10 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-], (Controller) => {
+    "sap/ui/core/mvc/Controller",
+    "flightui5as/Formatter/Formatter"
+], (Controller, Formatter) => {
     "use strict";
     return Controller.extend("flightui5as.controller.Main", {
+        formatter: Formatter,
         onInit() {
             var oFlightJSONModel = new sap.ui.model.json.JSONModel();
             var that = this;
@@ -12,18 +14,17 @@ sap.ui.define([
                 sorters: [new sap.ui.model.Sorter("Carrid", false)],
                 success: function (oresponse) {
                     oFlightJSONModel.setData(oresponse.results);
-                    that.getOwnerComponent().setModel(oFlightJSONModel, "flightDataModel");
+                    that.getView().setModel(oFlightJSONModel, "flightDataModel");
                 },
                 error: function (oerror) { 
                     console.log("error")
                 },
             });
         },
-        onRowPress: function (oEvent) {
-            var oItem = oEvent.getParameter("listItem") || oEvent.getSource();
-            var oCtx = oItem.getBindingContext("flightDataModel");
-            var sCarrid = oCtx.getProperty("Carrid");
-            this.getOwnerComponent().getRouter().navTo("RouteDetail", { Carrid: sCarrid });
+        onListPress: function (oItem) {
+            this.getOwnerComponent().getRouter().navTo("Detail", {
+                Carrid: oItem.getSource().getBindingContext("flightDataModel").getProperty("Carrid")
+            });
         }
     });
 });
