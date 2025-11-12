@@ -4,8 +4,6 @@
     xmlns:m="sap.m"
     xmlns="sap.uxap">
 
-	
-
         <ObjectPageLayout id="ObjectPageLayout"
                     showTitleInHeaderContent="true"
 					alwaysShowContentHeader="false"
@@ -22,7 +20,6 @@
                         <snappedHeading>
 							<m:FlexBox id="_IDGenFlexBox" wrap="Wrap" fitContainer="true" alignItems="Center">
 								<m:FlexBox id="_IDGenFlexBox1" wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
-									<!-- <m:Avatar id="_IDGenAvatar" src="{path: 'FlghDetailModel>Carrid', formatter:'.formatter.getCarrierLogo'}" displaySize="S" displayShape="Square"/> -->
 									<m:Title id="_IDGenTitle3" text="{FlDetailModel>/Carrname}" wrapping="true" class="sapUiTinyMarginEnd"/>
 								</m:FlexBox>
 							</m:FlexBox>
@@ -40,7 +37,7 @@
                 <headerContent>
 					<m:FlexBox id="_IDGenFlexBox2" wrap="Wrap" fitContainer="true" alignItems="Stretch">
 						<m:Avatar id="_IDGenAvatar1" 
-                        src="{path: 'FlDetailModel>/Carrid', formatter:'.formatter.getCarrierLogo'}"
+                        src="{path: 'FlDetailModel>/Carrid', formatter: '.formatter.getLogo'}"
 								  displaySize="L"
 								  displayShape="Square"
 								  class="sapUiTinyMarginEnd">

@@ -1,10 +1,11 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "flightui5as/Formatter/Formatter"
-], (Controller, Formatter) => {
+    "flightui5as/formatter/Formatter"
+], (Controller, JSONModel, Formatter) => {
     "use strict";
     return Controller.extend("flightui5as.controller.Main", {
         formatter: Formatter,
+        
         onInit() {
             var oFlightJSONModel = new sap.ui.model.json.JSONModel();
             var that = this;

@@ -31,20 +31,19 @@ sap.ui.define([
             return sUrl;
         },
 
-    getCarrierLogo: function (sCarrid) {
-    var sPath;
+    getLogo: function (sCarrid) {
+    debugger;
     switch (sCarrid) {
         case "LH":
-            sPath = "img/lufthansa.png";
-            break;
+            return "/img/lufthansa.png";
+            
         case "AB":
-            sPath = "img/Logo_airberlin.svg.png";
-            break;
+             return "/img/Logo_airberlin.svg.png";
+            
         default:
-            sPath = "img/default_logo.png";
-            break;
+             return "/img/default_logo.png";  
     }
-    return sPath;
+
 }
     };
 });

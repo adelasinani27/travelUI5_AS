@@ -1,8 +1,8 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "flightui5as/Formatter/Formatter",
-], (Controller, Formatter) => {
+    "flightui5as/formatter/Formatter",
+], (Controller, JSONModel, Formatter) => {
     "use strict";
 
     return Controller.extend("flightui5as.controller.Detail", {
@@ -10,11 +10,7 @@ sap.ui.define([
         formatter: Formatter,
 
         onInit: function () {
-            
-           console.log("Direct test formatter:", Formatter);
-           // Duhet të shfaqë objekt me getCarrierLogo, formatTableDates, urlFormatter
-           console.log("Direct test formatter LH:", Formatter.getCarrierLogo && Formatter.getCarrierLogo("LH"));
-
+        
             this.getOwnerComponent().getRouter().getRoute("Detail").attachPatternMatched(this._onObjectMatched, this);
             this.getView().getModel("FlDetailModel");
             
