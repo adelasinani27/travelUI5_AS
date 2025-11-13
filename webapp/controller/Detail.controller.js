@@ -2,7 +2,8 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "flightui5as/formatter/Formatter",
-], (Controller, JSONModel, Formatter) => {
+    "sap/m/MessageToast"
+], (Controller, JSONModel, Formatter, MessageToast) => {
     "use strict";
 
     return Controller.extend("flightui5as.controller.Detail", {
@@ -10,7 +11,8 @@ sap.ui.define([
         formatter: Formatter,
 
         onInit: function () {
-        
+
+            debugger
             this.getOwnerComponent().getRouter().getRoute("Detail").attachPatternMatched(this._onObjectMatched, this);
             this.getView().getModel("FlDetailModel");
             

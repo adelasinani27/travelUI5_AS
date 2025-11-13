@@ -116,12 +116,11 @@
           "id": "Main",
           "name": "Main"
         },
-
         "Detail": {
-           "id": "Detail",
-            "name": "Detail",
-            "viewLevel": 1
-          }
+          "id": "Detail",
+          "name": "Detail",
+          "viewLevel": 1
+        }
       }
     },
     "rootView": {
