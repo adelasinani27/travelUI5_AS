@@ -50,7 +50,7 @@ sap.ui.define([
                 this.oDialog.open();
             }
         },
-        
+
 
         onCreateNewRecord: function(){
             //debugger;
@@ -67,15 +67,6 @@ sap.ui.define([
             Currcode: this.getView().byId("currCodeInput").getValue(),
             Url: this.getView().byId("URLInput").getValue(),
             };
-
-            // var addparam = {
-            //    Carrid: sCarrid,
-            //    Carrname: sCarrname,
-            //    Currcode: sCurrcode,
-            //    Url: sUrl
-
-            // };
-
             var that=this;
             var oDataModel = this.getOwnerComponent().getModel();
             this.oDialog.setBusy(true);
@@ -85,7 +76,7 @@ sap.ui.define([
                 urlParameters: mParams,
                 success: function (oData, response) {
                     //NXIRR SUCCESS MESAGGE
-                    //MBYLL DIALOGUN (POPUPI)
+                    //MBYLL DIALOGUN (POPUPI)        NE ECLIPSE, UPDATE FIELD, DHE PA PERFSHIRE CARRID...
                     that.oDialog.close(); //close the dialog
                     that.oDialog.setBusy(false);//set dialog busy false
                     that.readFlight(that);//update the model//new function
@@ -102,8 +93,176 @@ sap.ui.define([
             });
         },
 
+    
         onCancelRecord: function(){
             this.oDialog.close();
+        },
+
+        onUpdateRecord: function () {
+            
+            var oTable = this.getView().byId("flightTable");
+            var oSelectedItem = oTable.getSelectedItem(); // Use getSelectedItem() for SingleSelectLeft mode
+            
+            
+            if (!oSelectedItem) {
+                MessageToast.show("Please select an airline to update");
+                return;
+            }
+             
+            // Get the data of the selected item
+            var oContext = oSelectedItem.getBindingContext("flightDataModel");
+            var oSelectedData = oContext.getObject();
+
+             console.log("Selected airline data:", oSelectedData);
+            
+            // Store selected data in a local model for the dialog
+            var oUpdateModel = new sap.ui.model.json.JSONModel(oSelectedData);
+            this.getView().setModel(oUpdateModel, "updateModel");
+            
+            // Open the update dialog
+            if (!this.oUpdateDialog) {
+                this.loadFragment({
+                    name: "flightui5as.fragment.UpdateAirline" // FIXED: Changed to match actual fragment name
+                }).then(
+                    function (oDialog) {
+                        this.oUpdateDialog = oDialog;
+                        this.oUpdateDialog.open();
+                    }.bind(this)
+                );
+            } else {
+                this.oUpdateDialog.open();
+            }
+        },
+
+        onSaveUpdatedRecord: function () {
+            // Get values from the dialog inputs
+            var sCarrid = this.getView().byId("carrIDInputUpdate").getValue();
+            var sCarrname = this.getView().byId("carrNameInputUpdate").getValue();
+            var sCurrcode = this.getView().byId("currCodeInputUpdate").getValue();
+            var sUrl = this.getView().byId("URLInputUpdate").getValue();
+            
+            // Validation: Check if required fields are filled
+            if (!sCarrid || !sCarrname || !sCurrcode) {
+                MessageToast.show("Please fill all required fields");
+                return;
+            }
+            
+            // Prepare parameters for the backend call
+            var mParams = {
+                Carrid: sCarrid,
+                Carrname: sCarrname,
+                Currcode: sCurrcode,
+                Url: sUrl
+            };
+            
+            var that = this;
+            var oDataModel = this.getOwnerComponent().getModel();
+            
+            // Set dialog to busy state
+            this.oUpdateDialog.setBusy(true);
+            
+            // Call the backend update function
+            oDataModel.callFunction("/update_airline", {
+                method: "POST",
+                urlParameters: mParams,
+                success: function (oData, response) {
+                    // Close the dialog
+                    that.oUpdateDialog.close();
+                    // Remove busy state
+                    that.oUpdateDialog.setBusy(false);
+                    // Refresh the table data
+                    that.readFlight(that);
+                    // Show success message
+                    MessageToast.show("The Airline Updated Successfully");
+                },
+                error: function (oError) {
+                    // Remove busy state
+                    that.oUpdateDialog.setBusy(false);
+                    // Show error message
+                    MessageToast.show("An error occurred while updating");
+                    that.oUpdateDialog.close();
+                }
+            });
+        },
+
+        //***************************************************
+        //********************CANCEL UPDATE DIALOG***********
+        //***************************************************
+        onCancelUpdateRecord: function () {
+            this.oUpdateDialog.close();
+        },
+
+
+        onDeleteSingleItem: function(oEvent) {
+            var oButton = oEvent.getSource();
+            var oContext = oButton.getBindingContext("flightDataModel");
+            var oData = oContext.getObject();
+            
+            // Store for deletion
+            this._itemToDelete = oData;
+            
+            // Show confirmation dialog
+            this._showDeleteConfirmation(
+                "Are you sure you want to delete airline " + oData.Carrid + " (" + oData.Carrname + ")?"
+            );
+        },
+
+        // Show confirmation dialog
+        _showDeleteConfirmation: function(sMessage) {
+            if (!this.oDeleteDialog) {
+                this.loadFragment({
+                    name: "flightui5as.fragment.DeleteConfirmation"
+                }).then(
+                    function (oDialog) {
+                        this.oDeleteDialog = oDialog;
+                        this.getView().byId("deleteConfirmText").setText(sMessage);
+                        this.oDeleteDialog.open();
+                    }.bind(this)
+                );
+            } else {
+                this.getView().byId("deleteConfirmText").setText(sMessage);
+                this.oDeleteDialog.open();
+            }
+        },
+
+        // Confirm deletion
+        onConfirmDelete: function() {
+            if (!this._itemToDelete) {
+                return;
+            }
+            
+            var that = this;
+            var oDataModel = this.getOwnerComponent().getModel();
+            var mParams = {
+                Carrid: this._itemToDelete.Carrid,
+                
+            };
+            
+            this.oDeleteDialog.setBusy(true);
+            
+            oDataModel.callFunction("/delete_airline", {
+                method: "POST",
+                urlParameters: mParams,
+                success: function (oData, response) {
+                    that.oDeleteDialog.setBusy(false);
+                    that.oDeleteDialog.close();
+                    that.readFlight(that);
+                    MessageToast.show("Airline deleted successfully");
+                    that._itemToDelete = null;
+                },
+                error: function (oError) {
+                    that.oDeleteDialog.setBusy(false);
+                    MessageToast.show("An error occurred while deleting");
+                    that.oDeleteDialog.close();
+                    that._itemToDelete = null;
+                }
+            });
+        },
+
+        // Cancel deletion
+        onCancelDelete: function() {
+            this.oDeleteDialog.close();
+            this._itemToDelete = null;
         },
 
 

@@ -1,50 +1,62 @@
 <mvc:View controllerName="flightui5as.controller.Main"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-    <Table id="_IDGenTable"
-		items="{
-			path: 'flightDataModel>/',
-			sorter: {
-			path: 'Carrname'
-			}
-		}">
-		<headerToolbar>
-		   <OverflowToolbar id="_IDGenOverflowToolbar">
-		       <Title id="IDGenTitle" text="{Products}" level="H2"/>
-			   <ToolbarSpacer id="_IDGenToolbarSpacer"/>
-			   <!-- <Button id="_IDGenButton" text="Open Dialog" press="onOpenPressed"/> -->
-			    <Button id="_IDGenButton1" text="Create Airline" press="onAddNewRecord"/>
-			   </OverflowToolbar>
-   
-		</headerToolbar>
+    xmlns:m="sap.m">
+    <m:Page id="page" title="{i18n>title}">
+        <m:Table id="flightTable"
+         mode="SingleSelectLeft"
+            items="{
+                path: 'flightDataModel>/',
+                sorter: {
+                    path: 'Carrname'
+                }
+            }">
+            <m:headerToolbar>
+                <m:OverflowToolbar id="_IDGenOverflowToolbar">
+                    <m:Title id="IDGenTitle" text="Airlines" level="H2"/>
+                    <m:ToolbarSpacer id="_IDGenToolbarSpacer"/>
+                    <m:Button id="_IDGenButton1" text="Create Airline" press="onAddNewRecord"/>
+                    <m:Button id="_IDGenButton2" text="Update Airline" press="onUpdateRecord" type="Emphasized"/>
 
-		<columns>
-			<Column id="_IDGenColumn">
-				<Text id="_IDGenText" text="{i18n>Carrid}" />
-			</Column>
-			<Column id="_IDGenColumn1">
-				<Text id="_IDGenText1" text="{i18n>Carrname}" />
-			</Column>
-			<Column id="_IDGenColumn3">
-				<Text id="_IDGenText33" text="{i18n>Currcode}" />
-			</Column>
-			<Column id="_IDGenColumn2">
-				<Text id="_IDGenText2" text="{i18n>Url}" />
-			</Column>
-
-		</columns>
-		<items>
-			<ColumnListItem id="_IDGenColumnListItem" vAlign="Middle" type="Navigation" press="onListPress">
-				<cells>
-					<Text id="_IDGenText3" text="{flightDataModel>Carrid}" wrapping="false" />
-					<Text id="_IDGenText4" text="{flightDataModel>Carrname}" wrapping="false"/>
-					<Text id="_IDGenText7" text="{flightDataModel>Currcode}" />
-					<Text id="_IDGenText5" 
-					text="{parts: ['flightDataModel>Url', 'flightDataModel>Carrname'], formatter: '.formatter.urlFormatter'}" />
-				</cells>
-			</ColumnListItem>
-		</items>
-	</Table>
-    </Page>
+                </m:OverflowToolbar>
+            </m:headerToolbar>
+            <m:columns>
+                <m:Column id="_IDGenColumn">
+                    <m:Text id="_IDGenText" text="{i18n>Carrid}" />
+                </m:Column>
+                <m:Column id="_IDGenColumn1">
+                    <m:Text id="_IDGenText1" text="{i18n>Carrname}" />
+                </m:Column>
+                <m:Column id="_IDGenColumn3">
+                    <m:Text id="_IDGenText33" text="{i18n>Currcode}" />
+                </m:Column>
+                <m:Column id="_IDGenColumn2">
+                    <m:Text id="_IDGenText2" text="{i18n>Url}" />
+                </m:Column>
+                <m:Column id="deleteColumn" width="4rem">
+                    <m:Text id="_IDGenText8" text="Remove" />
+                </m:Column>
+            </m:columns>
+            <m:items>
+                <m:ColumnListItem id="_IDGenColumnListItem" vAlign="Middle" type="Active" press="onListPress">
+                    <m:cells>
+                        <!-- <m:RadioButton id="_IDGenRadioButton" 
+    groupName="AirlineGroup"
+    selected="{= ${viewModel>/selectedCarrid} === ${flightDataModel>Carrid} }"
+    select="onRadioSelect"
+                        /> -->
+                        <m:Text id="_IDGenText3" text="{flightDataModel>Carrid}" wrapping="false" />
+                        <m:Text id="_IDGenText4" text="{flightDataModel>Carrname}" wrapping="false"/>
+                        <m:Text id="_IDGenText7" text="{flightDataModel>Currcode}" />
+                        <m:Text id="_IDGenText5"
+                            text="{parts: ['flightDataModel>Url', 'flightDataModel>Carrname'], formatter: '.formatter.urlFormatter'}" />
+                    <m:Button id="_IDGenButton4" 
+                            icon="sap-icon://delete" 
+                            type="Reject" 
+                            press="onDeleteSingleItem"
+                            tooltip="Delete this airline" />
+                    </m:cells>
+                </m:ColumnListItem>
+            </m:items>
+        </m:Table>
+    </m:Page>
 </mvc:View>
