@@ -110,6 +110,9 @@
               <m:Column id="_IDGenColumn14" >
                 <m:Text id="_IDText19" text="{i18n>SeatsoccF}" />
               </m:Column>
+			<!-- <m:Column id="deleteColumn1" width="4rem">
+                    <m:Text id="_IDGenText9" text="Remove" />
+            </m:Column> -->
         </m:columns>
 
         <m:items>
@@ -122,11 +125,17 @@
 					<m:Text id="_IDGenText24"  text="{FlDetailModel>PlaneType}" />
 					<m:Text id="_IDGenText25"  text="{FlDetailModel>SeatsMax}" />
 					<m:Text id="_IDGenText26"  text="{FlDetailModel>SeatsOcc}" />
-					<m:Text id="_IDGenText27"  text="{FlDetailModel>PaymentSum}" />
-					<m:Text id="_IDGenText28"  text="{FlDetailModel>SeatsmaxB}" />
+					<!-- <m:Text id="_IDGenText27"  text="{FlDetailModel>PaymentSum}" /> -->
+					<!-- <m:Text id="_IDGenText28"  text="{FlDetailModel>SeatsmaxB}" /> -->
 					<m:Text id="_IDGenText29"  text="{FlDetailModel>SeatsoccB}" />
 					<m:Text id="_IDGenText30"  text="{FlDetailModel>SeatsmaxF}" />
 					<m:Text id="_IDGenText32"  text="{FlDetailModel>SeatsoccF}" />
+					<m:Button id="_IDGenButton5"
+    icon="sap-icon://delete"
+    type="Reject"
+    tooltip="Delete"
+    press="onDeleteDetailRow"
+/>
 				</m:cells>
 			</m:ColumnListItem>
 		</m:items>

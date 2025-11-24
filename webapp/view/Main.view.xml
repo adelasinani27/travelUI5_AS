@@ -16,7 +16,7 @@
                     <m:ToolbarSpacer id="_IDGenToolbarSpacer"/>
                     <m:Button id="_IDGenButton1" text="Create Airline" press="onAddNewRecord"/>
                     <m:Button id="_IDGenButton2" text="Update Airline" press="onUpdateRecord" type="Emphasized"/>
-
+                    <m:Button id="_IDGenButton8" icon="sap-icon://excel-attachment" press="onExport"/>
                 </m:OverflowToolbar>
             </m:headerToolbar>
             <m:columns>
