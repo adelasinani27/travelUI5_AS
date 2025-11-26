@@ -14,6 +14,8 @@
                 <m:OverflowToolbar id="_IDGenOverflowToolbar">
                     <m:Title id="IDGenTitle" text="Airlines" level="H2"/>
                     <m:ToolbarSpacer id="_IDGenToolbarSpacer"/>
+                      <m:SearchField id="IDGenSearch" width="16rem" placeholder="Search Airline ID or Name"
+            liveChange="onSearch" search="onSearch"/>
                     <m:Button id="_IDGenButton1" text="Create Airline" press="onAddNewRecord"/>
                     <m:Button id="_IDGenButton2" text="Update Airline" press="onUpdateRecord" type="Emphasized"/>
                     <m:Button id="_IDGenButton8" icon="sap-icon://excel-attachment" press="onExport"/>

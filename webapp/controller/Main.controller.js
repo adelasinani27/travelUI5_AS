@@ -12,8 +12,8 @@ sap.ui.define([
         onInit() {
             var oFlightJSONModel = new sap.ui.model.json.JSONModel();
             var that = this;
-            var oDataModel = this.getOwnerComponent().getModel();
-            var sPath = "/FlightAS";
+            var oDataModel = this.getOwnerComponent().getModel("");
+            var sPath = "/FlightAs";
 
             oDataModel.read(sPath, {
                 sorters: [new sap.ui.model.Sorter("Carrid", false)],
@@ -266,44 +266,72 @@ sap.ui.define([
             this._itemToDelete = null;
         },
 
+onExport: function () {
+    var oTable = this.byId("flightTable");
+    var oBinding = oTable.getBinding("items");
 
-        onExport: function () {
-            var oModel = this.getView().getModel("flightDataModel");
-            var aData = oModel.getData();   // your table data array
-            if (!aData || aData.length === 0) {
-                sap.m.MessageToast.show("No data to export.");
-                return;
-            }
-            // Define Excel Columns (match your table)
-            var aCols = [
-                { label: "Carrid", property: "Carrid" },
-                { label: "Carrname", property: "Carrname" },
-                { label: "Url", property: "Url" }
-              
-            ];
-            // Spreadsheet settings
-            var oSettings = {
-                workbook: {
-                    columns: aCols
-                },
-                dataSource: aData,
-                fileName: "Air.xlsx"
-            };
-            var oSpreadsheet = new sap.ui.export.Spreadsheet(oSettings);
-            oSpreadsheet.build()
-                .then(function () {
-                    sap.m.MessageToast.show("Excel downloaded.");
-                })
-                .catch(function (error) {
-                    console.error(error);
-                })
-                .finally(function () {
-                    oSpreadsheet.destroy();
-                });
+    
+    var aContexts = oBinding.getCurrentContexts();
+    var aData = aContexts.map(function(oContext) {
+        return oContext.getObject();
+    });
+
+    if (!aData || aData.length === 0) {
+        sap.m.MessageToast.show("No data to export.");
+        return;
+    }
+
+   
+    var aCols = [
+        { label: "Carrid", property: "Carrid" },
+        { label: "Carrname", property: "Carrname" },
+        { label: "Url", property: "Url" },
+        { label: "Currcode", property: "Currcode" }
+    ];
+
+  
+    var oSettings = {
+        workbook: {
+            columns: aCols
         },
+        dataSource: aData,
+        fileName: "Air.xlsx"
+    };
+    var oSpreadsheet = new sap.ui.export.Spreadsheet(oSettings);
+    oSpreadsheet.build()
+        .then(function () {
+            sap.m.MessageToast.show("Excel downloaded.");
+        })
+        .catch(function (error) {
+            console.error(error);
+        })
+        .finally(function () {
+            oSpreadsheet.destroy();
+        });
+},
 
 
+        onSearch: function(oEvent) {
+    var sQuery = oEvent.getParameter("query") || oEvent.getParameter("newValue") || "";
+    var oTable = this.byId("flightTable");
+    var oBinding = oTable.getBinding("items");
 
+    if (!sQuery) {
+        oBinding.filter([]);
+        return;
+    }
+
+    var aFilters = [
+        new sap.ui.model.Filter("Carrid", sap.ui.model.FilterOperator.EQ, sQuery),
+        new sap.ui.model.Filter("Carrname", sap.ui.model.FilterOperator.Contains, sQuery)
+    ];
+
+    oBinding.filter(new sap.ui.model.Filter({
+        filters: aFilters,
+        and: false
+    }));
+}
+,
 
         readFlight: function(that){
             //ca kemi deklaruar ne onINIT, nje read te flight dhe mbushim modelin...that.getowner.component....
