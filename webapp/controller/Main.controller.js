@@ -12,8 +12,8 @@ sap.ui.define([
         onInit() {
             var oFlightJSONModel = new sap.ui.model.json.JSONModel();
             var that = this;
-            var oDataModel = this.getOwnerComponent().getModel("");
-            var sPath = "/FlightAs";
+            var oDataModel = this.getOwnerComponent().getModel();
+            var sPath = "/FlightAS";
 
             oDataModel.read(sPath, {
                 sorters: [new sap.ui.model.Sorter("Carrid", false)],
